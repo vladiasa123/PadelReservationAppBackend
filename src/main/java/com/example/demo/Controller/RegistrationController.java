@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,6 @@ public class RegistrationController {
     @PostMapping(value = "/req/login", consumes = "application/json")
     public ResponseEntity<?> loginUser(@RequestBody MyAppUser user) {
         System.out.println("Received Login Request: " + user.getEmail());
-
         Optional<MyAppUser> existingUser = myAppUserRepository.findByEmail(user.getEmail());
 
         if (existingUser.isEmpty()) {
@@ -51,7 +51,6 @@ public class RegistrationController {
         boolean passwordMatch = passwordEncoder.matches(user.getPassword(), foundUser.getPassword());
 
         if (!passwordMatch) {
-            // Return a 401 Unauthorized with an error response
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(new ErrorResponse("Invalid credentials!"));
         }
@@ -59,6 +58,7 @@ public class RegistrationController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(foundUser.getUsername(), user.getPassword())
         );
-        return ResponseEntity.ok(new SuccesResponse("Login successful!"));
+        String token = JwtUtil.generateToken(user.getUsername());
+        return ResponseEntity.ok(new SuccesResponse("Login successful!", token));
     }
 }

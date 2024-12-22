@@ -5,8 +5,9 @@ public class SuccesResponse {
     private String token;
 
     // Constructor
-    public SuccesResponse(String message) {
+    public SuccesResponse(String message, String token) {
         this.message = message;
+        this.token = token;
     }
 
     // Getter and setter
