@@ -58,7 +58,7 @@ public class RegistrationController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(foundUser.getUsername(), user.getPassword())
         );
-        String token = JwtUtil.generateToken(user.getUsername());
+        String token = JwtUtil.generateToken(user.getEmail());
         return ResponseEntity.ok(new SuccesResponse("Login successful!", token));
     }
 }

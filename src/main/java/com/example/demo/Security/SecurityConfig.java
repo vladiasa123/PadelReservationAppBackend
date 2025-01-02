@@ -66,6 +66,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for REST APIs
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers("/req/signup").permitAll();
+                    registry.requestMatchers("/req/accesPage").permitAll();
                     registry.requestMatchers("/req/login").permitAll();
                     registry.anyRequest().authenticated();
                 })
