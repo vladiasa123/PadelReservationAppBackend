@@ -10,7 +10,6 @@ public class SuccesResponse {
         this.token = token;
     }
 
-    // Getter and setter
     public String getMessage() {
         return message;
     }

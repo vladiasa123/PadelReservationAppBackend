@@ -11,7 +11,6 @@ public class UserAccountController {
     @GetMapping(value = "/req/userData")
     public ResponseEntity<String> getUserData(HttpSession session) {
         String username = (String) session.getAttribute("username");
-
         if(username != null){
             return ResponseEntity.ok("User data for: " + username);
         }else{
