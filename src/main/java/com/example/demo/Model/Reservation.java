@@ -12,15 +12,15 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String data;
     private String day;
+    private String date;
 
-    public String getData() {
-        return data;
+    public String getDate() {
+        return date;
     }
 
     public void setData(String data) {
-        this.data = data;
+        this.date = data;
     }
 
     public String getDay() {
