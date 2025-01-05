@@ -63,7 +63,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for REST APIs
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers("/req/signup").permitAll();
                     registry.requestMatchers("/req/accesPage").permitAll();

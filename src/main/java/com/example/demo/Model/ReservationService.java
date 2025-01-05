@@ -8,4 +8,8 @@ public class ReservationService {
 
     @Autowired
     private ReservationRepository repository;
+
+    public Reservation saveReservation(Reservation reservation) {
+        return repository.save(reservation);
+    }
 }
