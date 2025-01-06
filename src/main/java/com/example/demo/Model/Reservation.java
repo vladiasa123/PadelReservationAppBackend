@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 public class Reservation {
 
 
-    private Long dayId;
+    private int dayId;
 
     public Long getId() {
         return id;
@@ -29,11 +29,11 @@ public class Reservation {
     private String hour;
     private String date;
 
-    public Long getDayId() {
+    public int getDayId() {
         return dayId;
     }
 
-    public void setDayId(Long dayId) {
+    public void setDayId(int dayId) {
         this.dayId = dayId;
     }
 

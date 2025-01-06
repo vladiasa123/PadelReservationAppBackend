@@ -69,6 +69,7 @@ public class SecurityConfig {
                     registry.requestMatchers("/req/accesPage").permitAll();
                     registry.requestMatchers("/req/login").permitAll();
                     registry.requestMatchers("/req/Reservation").permitAll();
+                    registry.requestMatchers("/req/availability").permitAll();
                     registry.anyRequest().authenticated();
                 })
                 .build();

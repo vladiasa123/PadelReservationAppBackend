@@ -1,8 +1,10 @@
 package com.example.demo.Controller;
 
 
+import com.example.demo.Model.ReservationService;
 import com.example.demo.Model.Token;
 import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,10 @@ import java.util.Map;
 
 @RestController
 public class AccessController {
+
+
+    @Autowired
+    private ReservationService reservationService;
 
 
     @PostMapping(value = "req/accesPage", consumes = "application/json", produces = "application/json")
