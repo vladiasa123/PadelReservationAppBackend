@@ -64,9 +64,9 @@ public class ReservationController {
 
     @PostMapping(value = "/req/Reservation", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Map<String, String>> reservationEntry(@RequestBody Reservation reservation) throws Exception {
-        System.out.println(reservation.getDate() + " " + reservation.getHour() + " " + reservation.getDayId());
+        System.out.println(reservation.getHour() + " " + reservation.getDayId() + " " + reservation.getUserId());
         reservation = reservationService.saveReservation(reservation);
-      String qrCodeText = "day" + reservation.getHour() + "hour" + reservation.getDate();
+      String qrCodeText = "day" + reservation.getHour() + "hour";
         KeyGenerator keyGenerator = KeyGenerator.getInstance("DES");
         SecretKey myDesKey = keyGenerator.generateKey();
 
@@ -90,7 +90,7 @@ public class ReservationController {
 
         Map<String, String> response = new HashMap<>();
         response.put("message", qrCodeBase64);
-        System.out.println(reservation.getDate() + " " + reservation.getHour() + " " + reservation.getDayId());
+        System.out.println(reservation.getHour() + " " + reservation.getDayId());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

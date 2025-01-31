@@ -11,6 +11,12 @@ public class Reservation {
 
 
     private int dayId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String userId;
+    private String hour;
+    private String date;
 
     public Long getId() {
         return id;
@@ -20,14 +26,13 @@ public class Reservation {
         this.id = id;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    public String getUserId() {
+        return userId;
+    }
 
-
-
-    private String hour;
-    private String date;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public int getDayId() {
         return dayId;
@@ -37,9 +42,6 @@ public class Reservation {
         this.dayId = dayId;
     }
 
-    public String getDate() {
-        return date;
-    }
 
     public void setData(String data) {
         this.date = data;

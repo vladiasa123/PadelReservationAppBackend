@@ -27,7 +27,7 @@ public class AvailabilityController {
         Map<String, Object> response = new HashMap<>();
 
         if (availableSlots.isEmpty()) {
-            response.put(false);
+            response.put("false", "false");
         } else {
             response.put("dayId", reservation.getDayId());
             response.put("availableSlots", availableSlots);
