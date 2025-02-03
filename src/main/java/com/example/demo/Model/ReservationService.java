@@ -23,4 +23,9 @@ public class ReservationService {
         return availability.findByDayId(dayId);
     }
 
+
+    public List<Reservation> findByUserId(int userId) {
+        return availability.findByUserId(userId);
+    }
+
 }

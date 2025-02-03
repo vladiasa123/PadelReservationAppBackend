@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,14 +67,14 @@ public class ReservationController {
     public ResponseEntity<Map<String, String>> reservationEntry(@RequestBody Reservation reservation) throws Exception {
         System.out.println(reservation.getHour() + " " + reservation.getDayId() + " " + reservation.getUserId());
         reservation = reservationService.saveReservation(reservation);
-      String qrCodeText = "day" + reservation.getHour() + "hour";
+        String qrCodeText = "day" + reservation.getHour() + "hour";
         KeyGenerator keyGenerator = KeyGenerator.getInstance("DES");
         SecretKey myDesKey = keyGenerator.generateKey();
 
         Cipher desCipher;
         desCipher = Cipher.getInstance("DES");
 
-        byte[] text = qrCodeText.getBytes("UTF8");
+        byte[] text = qrCodeText.getBytes(StandardCharsets.UTF_8);
 
         desCipher.init(Cipher.ENCRYPT_MODE, myDesKey);
         byte[] encryptedText = desCipher.doFinal(text);
@@ -93,5 +94,22 @@ public class ReservationController {
         System.out.println(reservation.getHour() + " " + reservation.getDayId());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PostMapping(value = "req/userReservation", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Map<String, Object>> reservationEntry2(@RequestBody Reservation reservation) throws Exception {
+        var userSlots = reservationService.findByUserId(reservation.getUserId()).stream().map(Reservation::getHour).toList();
+        var userDays = reservationService.findByUserId(reservation.getUserId()).stream().map(Reservation::getDayId).toList();
+        Map<String, Object> response = new HashMap<>();
+
+        if (userSlots.isEmpty()) {
+            response.put("message", "No reservations found");
+        } else {
+            response.put("userSlots", userSlots);
+            response.put("userDays", userDays);
+        }
+
+        return ResponseEntity.ok(response);
+
     }
 }
